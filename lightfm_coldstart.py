@@ -34,7 +34,7 @@ events = pd.read_csv("data/events.csv")
 with open("data/cf_artifacts.pkl", "rb") as f:
     cf_artifacts = pickle.load(f)
 
-cf_precision = cf_artifacts['cf_precision']
+cf_precision = cf_artifacts['cf_results']['precision_at_10']
 print(f"    CF Precision@10 (Lab 2.2) : {cf_precision:.4f}  <- baseline to beat")
 
 purchases = events[events['event'] == 'transaction'][['visitorid', 'itemid']]
@@ -215,6 +215,8 @@ for epoch in range(1, 21):
     
     cf_epochs.append(cf_p)
     hybrid_epochs.append(h_p)
+
+
 
 # --- Generate Step Tracking Evaluation Plots ---
 fig, ax = plt.subplots(figsize=(10, 5))
